@@ -83,8 +83,11 @@ var app = {
 		cordova.plugins.DCSync.searchDocuments( {}, {path:"co2tl_app/index.html"}).then( function(data) {
 				if( data && data.length>0 && data[0].files && data[0].files.length>0 ) {
 					cordova.plugins.DCSync.getContentRootUri().then( function(uri) {
-						ele.innerHTML = uri.replace("cdvfile://localhost/", "file:///") + data[0].files[0];
-						document.getElementById('gobutton').style="";
+						window.resolveLocalFileSystemURL(uri, function(entry) {
+    							ele.innerHTML = entry.toURL() + "/" +  data[0].files[0];
+    							document.getElementById('gobutton').style="";
+						});
+
 					}).fail(app.failure);
 				}
 				else {

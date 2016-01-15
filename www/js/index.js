@@ -20,6 +20,12 @@ var app = {
 		document.getElementById( 'getContentRootUri').addEventListener('click', this.getContentRootUri);
 		document.getElementById( 'searchDocuments').addEventListener('click', this.searchDocuments);
 		document.getElementById( 'getDocumentCount').addEventListener('click', this.getDocumentCount);
+
+		document.getElementById( 'saveForUpload').addEventListener('click', this.saveForUpload);
+		document.getElementById( 'qbe1').addEventListener('click', function() { app.qbe(1);});
+		document.getElementById( 'qbe2').addEventListener('click', function() { app.qbe(2);});
+		document.getElementById( 'qbe3').addEventListener('click', function() { app.qbe(3);});
+		document.getElementById( 'qbe4').addEventListener('click', function() { app.qbe(4);});
 		},
     // deviceready Event Handler
     //
@@ -139,6 +145,26 @@ var app = {
 		cordova.plugins.DCSync.setSyncOptions({url:'http://10.0.2.2:49341/DC', username:'anonymous', password:'YTI2Y2UxYzgxZTBiN2U4OWZmZjU1OWJmYmU4ZTEwN2E2MzFhNGFlMmFkYzlhMWMxYmE1YWYyOGNiYWMyZWI4ZA==', interval: 1440}).then(app.log, app.failure);
 	}
 	
+	saveForUpload: function() {
+		app.clear();
+		cordova.plugins.DCSync.saveDocument('TESTCID-UPLOADDOC','TESTS/UPLOAD', { testkey:'testvalue'}, ["co2tl_app/index.html"], false).then(app.log, app.failure);
+	}
+
+	qbe: function(index) {
+		app.clear();
+		var qbex = {};
+		switch(index) {
+			case 1: qbex = {NbDoors:3};
+				break;
+			case 2 qbex = {Brand:{Code:"15"}}
+				break;
+			case 3: 
+			case 4:
+				qbex = {Brand:{Code:15}}
+				break;
+		}
+		cordova.plugins.DCSync.searchDocuments(qbex, {path:"CO2TL/Vehicles"}).then(app.log, app.failure);
+	}
 	
 }
 

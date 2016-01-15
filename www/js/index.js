@@ -143,12 +143,12 @@ var app = {
 	setSyncOptions: function() {
 		app.clear();
 		cordova.plugins.DCSync.setSyncOptions({url:'http://10.0.2.2:49341/DC', username:'anonymous', password:'YTI2Y2UxYzgxZTBiN2U4OWZmZjU1OWJmYmU4ZTEwN2E2MzFhNGFlMmFkYzlhMWMxYmE1YWYyOGNiYWMyZWI4ZA==', interval: 1440}).then(app.log, app.failure);
-	}
+	},
 	
 	saveForUpload: function() {
 		app.clear();
 		cordova.plugins.DCSync.saveDocument('TESTCID-UPLOADDOC','TESTS/UPLOAD', { testkey:'testvalue'}, ["co2tl_app/index.html"], false).then(app.log, app.failure);
-	}
+	},
 
 	qbe: function(index) {
 		app.clear();

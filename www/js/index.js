@@ -156,7 +156,7 @@ var app = {
 		switch(index) {
 			case 1: qbex = {NbDoors:3};
 				break;
-			case 2 qbex = {Brand:{Code:"15"}}
+			case 2: qbex = {Brand:{Code:"15"}}
 				break;
 			case 3: 
 			case 4:

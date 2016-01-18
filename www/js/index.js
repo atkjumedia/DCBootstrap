@@ -123,7 +123,7 @@ var app = {
 
 	saveDocument: function() {
 		app.clear();
-		cordova.plugins.DCSync.saveDocument('TESTCID-DFIF_DFDF','TESTS/PATH1', { testkey:'testvalue'}, null, true).then(app.log, app.failure);
+		cordova.plugins.DCSync.saveDocument('B760D6D2-552C-4CF5-BBB6-B255D7619188','TESTS/PATH1', { testkey:'testvalue'}, null, true).then(app.log, app.failure);
 	},
 	searchDocuments: function() {
 		app.clear();
@@ -135,7 +135,7 @@ var app = {
 	},
 	deleteDocument: function() {
 		app.clear();
-		cordova.plugins.DCSync.deleteDocument('TESTCID-DFIF_DFDF').then(app.log, app.failure);
+		cordova.plugins.DCSync.deleteDocument('B760D6D2-552C-4CF5-BBB6-B255D7619188').then(app.log, app.failure);
 	},
 
 	setSyncOptions: function() {
@@ -150,18 +150,18 @@ var app = {
 	
 	saveForUpload: function() {
 		app.clear();
-		cordova.plugins.DCSync.saveDocument('TESTCID-UPLOADDOC','TESTS/UPLOAD', { testkey:'testvalue'}, ["co2tl_app/index.html"], false).then(app.log, app.failure);
+		cordova.plugins.DCSync.saveDocument('B760D6D2-552C-4CF5-BBB6-B255D7619188','TESTS/UPLOAD', { testkey:'testvalue'}, ["co2tl_app/index.html"], false).then(app.log, app.failure);
 	},
 	multipleUploadTest: function() {
 		app.clear();
 		cordova.plugins.DCSync.searchDocuments({}, {path:"TESTS/UPLOADM", exactMatch:true}).then(function(data) {
 			if( data.length==0 ) {
-				cordova.plugins.DCSync.saveDocument('TESTCID-UPLOADMDOC','TESTS/UPLOADM', { counter:0}, ["co2tl_app/index.html"], false)
+				cordova.plugins.DCSync.saveDocument('B760D6D2-552C-4CF5-BBB6-B255D7619180','TESTS/UPLOADM', { counter:0}, ["co2tl_app/index.html"], false)
 				.then(app.log, app.failure);
 			}
 			else {
 				data[0].document.counter ++;
-				cordova.plugins.DCSync.saveDocument('TESTCID-UPLOADMDOC','TESTS/UPLOADM', data[0].document, ["co2tl_app/index.html"], false)
+				cordova.plugins.DCSync.saveDocument(data[0].cid,'TESTS/UPLOADM', data[0].document, ["co2tl_app/index.html"], false)
 				.then(app.log, app.failure);
 			}
 		}, app.failure);

@@ -20,12 +20,15 @@ var app = {
 		document.getElementById( 'getContentRootUri').addEventListener('click', this.getContentRootUri);
 		document.getElementById( 'searchDocuments').addEventListener('click', this.searchDocuments);
 		document.getElementById( 'getDocumentCount').addEventListener('click', this.getDocumentCount);
+		document.getElementById( 'multipleUploadTest').addEventListener('click', this.multipleUploadTest);
 
 		document.getElementById( 'saveForUpload').addEventListener('click', this.saveForUpload);
 		document.getElementById( 'qbe1').addEventListener('click', function() { app.qbe(1);});
 		document.getElementById( 'qbe2').addEventListener('click', function() { app.qbe(2);});
 		document.getElementById( 'qbe3').addEventListener('click', function() { app.qbe(3);});
 		document.getElementById( 'qbe4').addEventListener('click', function() { app.qbe(4);});
+		
+		
 		},
     // deviceready Event Handler
     //
@@ -148,6 +151,22 @@ var app = {
 	saveForUpload: function() {
 		app.clear();
 		cordova.plugins.DCSync.saveDocument('TESTCID-UPLOADDOC','TESTS/UPLOAD', { testkey:'testvalue'}, ["co2tl_app/index.html"], false).then(app.log, app.failure);
+	},
+	multipleUploadTest: function() {
+		app.clear();
+		cordova.plugins.DCSync.searchDocuments({}, {path:"TESTS/UPLOADM", exactMatch:true}).then(function(data) {
+			if( data.length==0 ) {
+				cordova.plugins.DCSync.saveDocument('TESTCID-UPLOADMDOC','TESTS/UPLOADM', { counter:0}, ["co2tl_app/index.html"], false)
+				.then(app.log, app.failure);
+			}
+			else {
+				data[0].document.counter ++;
+				cordova.plugins.DCSync.saveDocument('TESTCID-UPLOADMDOC','TESTS/UPLOADM', data[0].document, ["co2tl_app/index.html"], false)
+				.then(app.log, app.failure);
+			}
+		}), app.failure);
+
+		
 	},
 
 	qbe: function(index) {

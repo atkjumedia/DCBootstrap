@@ -164,7 +164,7 @@ var app = {
 				cordova.plugins.DCSync.saveDocument('TESTCID-UPLOADMDOC','TESTS/UPLOADM', data[0].document, ["co2tl_app/index.html"], false)
 				.then(app.log, app.failure);
 			}
-		}), app.failure);
+		}, app.failure);
 
 		
 	},
